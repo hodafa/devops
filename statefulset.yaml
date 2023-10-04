@@ -1,9 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  # Metadata for the StatefulSet
 spec:
-  # Specification for the StatefulSet
   podManagementPolicy: OrderedReady
   replicas: 3
   revisionHistoryLimit: 10
@@ -38,7 +36,6 @@ spec:
       partition: 0
     type: RollingUpdate
   volumeClaimTemplates:
-  - # Persistent Volume Claim template for data storage
     spec:
       accessModes:
       - ReadWriteOnce
