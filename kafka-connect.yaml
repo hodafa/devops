@@ -49,9 +49,9 @@ spec:
         - name: CONNECTOR_CLASS
           value: "io.confluent.connect.s3.S3SinkConnector" 
         - name: CONNECTOR_TASKS_MAX
-          value: "1" # Maximum number of tasks to be created by this connector
+          value: "1" 
         - name: CONNECTOR_S3_BUCKET_NAME
           value: "elementor-data-candidates-bucket" 
         - name: CONNECTOR_S3_REGION
-          value: "eu-west-1" # Specify your AWS region
+          value: "eu-west-1" 
      
