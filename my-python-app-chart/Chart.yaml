@@ -1,0 +1,7 @@
+# python-app-chart/Chart.yaml
+
+apiVersion: v2
+name: my-python-app-chart
+version: 0.1.0
+description: A Helm chart for deploying a Python application
+

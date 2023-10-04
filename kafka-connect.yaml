@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-connect
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-connect
+  template:
+    metadata:
+      labels:
+        app: kafka-connect
+    spec:
+      containers:
+      - name: kafka-connect
+        image: confluentinc/cp-kafka-connect:latest
+        env:
+        - name: CONNECT_BOOTSTRAP_SERVERS
+          value: "172.31.100.169:9092,172.31.101.10:9092,172.31.99.207:9092" # Kafka bootstrap servers
+        - name: CONNECT_GROUP_ID
+          value: "kafka-connect-group"
+        - name: CONNECT_KEY_CONVERTER
+          value: "org.apache.kafka.connect.storage.StringConverter" 
+        - name: CONNECT_VALUE_CONVERTER
+          value: "org.apache.kafka.connect.storage.StringConverter" 
+        - name: CONNECT_REST_ADVERTISED_HOST_NAME
+          value: "172.31.96.177" 
+        - name: AWS_ACCESS_KEY_ID
+          value: "" 
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "" 
+        - name: AWS_REGION
+          value: "eu-west-1" # Replace with your AWS region
+        - name: S3_BUCKET_NAME
+          value: "s3://elementor-data-candidates-bucket/hodaf-cpu" # Specify the folder hierarchy
+        - name: CONNECT_S3_FORMAT_CLASS
+          value: "io.confluent.connect.s3.format.json.JsonFormat"
+        - name: CONNECT_S3_FLUSH_SIZE
+          value: "3"
+        - name: CONNECT_TOPICS
+          value: "k8s_monitoring" # Specify the Kafka topic to consume data from
+        - name: CONNECT_CONFIG_STORAGE_TOPIC
+          value: "kafka-connect-configs-new" # Specify the Kafka Connect configurations storage topic
+        - name: CONNECT_OFFSET_STORAGE_TOPIC
+          value: "kafka-connect-offsets"
+        - name: CONNECT_STATUS_STORAGE_TOPIC
+          value: "kafka-connect-status"
+        - name: CONNECTOR_CLASS
+          value: "io.confluent.connect.s3.S3SinkConnector" # Connector class for S3 Sink
+        - name: CONNECTOR_TASKS_MAX
+          value: "1" # Maximum number of tasks to be created by this connector
+        - name: CONNECTOR_S3_BUCKET_NAME
+          value: "elementor-data-candidates-bucket" # Specify your AWS S3 bucket name
+        - name: CONNECTOR_S3_REGION
+          value: "eu-west-1" # Specify your AWS region
+        # Add more S3 Sink Connector configurations here as needed

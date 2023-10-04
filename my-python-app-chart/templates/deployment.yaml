@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-kafka-monitoring-cpu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-monitoring-cpu
+  template:
+    metadata:
+      labels:
+        app: kafka-monitoring-cpu
+    spec:
+      containers:
+      - name: kafka-monitoring-cpu
+        image: dihoda/elmentor_app_monitor_cpu:1.0
+

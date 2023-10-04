@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  # Metadata for the StatefulSet
+spec:
+  # Specification for the StatefulSet
+  podManagementPolicy: OrderedReady
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: kafka-app
+  serviceName: kafka-svc
+  template:
+    # Template for the Pods inside the StatefulSet
+    metadata:
+      labels:
+        app: kafka-app
+    spec:
+      # Specification for the Pods
+      containers:
+      - # Container definition
+        image: doughgle/kafka-kraft
+        name: kafka-container
+        ports:
+        - containerPort: 9092
+          protocol: TCP
+        - containerPort: 9093
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /mnt/kafka
+          name: data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - # Persistent Volume Claim template for data storage
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+      volumeMode: Filesystem

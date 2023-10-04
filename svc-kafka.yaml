@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kafka-app
+  name: kafka-svc
+  namespace: default
+spec:
+  clusterIP: None
+  ports:
+  - name: "9092"
+    port: 9092
+    protocol: TCP
+    targetPort: 9092
+  selector:
+    app: kafka-app
+  type: ClusterIP
