@@ -31,27 +31,27 @@ spec:
         - name: AWS_SECRET_ACCESS_KEY
           value: "" 
         - name: AWS_REGION
-          value: "eu-west-1" # Replace with your AWS region
+          value: "eu-west-1" 
         - name: S3_BUCKET_NAME
-          value: "s3://elementor-data-candidates-bucket/hodaf-cpu" # Specify the folder hierarchy
+          value: "s3://elementor-data-candidates-bucket/hodaf-cpu" 
         - name: CONNECT_S3_FORMAT_CLASS
           value: "io.confluent.connect.s3.format.json.JsonFormat"
         - name: CONNECT_S3_FLUSH_SIZE
           value: "3"
         - name: CONNECT_TOPICS
-          value: "k8s_monitoring" # Specify the Kafka topic to consume data from
+          value: "k8s_monitoring" 
         - name: CONNECT_CONFIG_STORAGE_TOPIC
-          value: "kafka-connect-configs-new" # Specify the Kafka Connect configurations storage topic
+          value: "kafka-connect-configs-new"
         - name: CONNECT_OFFSET_STORAGE_TOPIC
           value: "kafka-connect-offsets"
         - name: CONNECT_STATUS_STORAGE_TOPIC
           value: "kafka-connect-status"
         - name: CONNECTOR_CLASS
-          value: "io.confluent.connect.s3.S3SinkConnector" # Connector class for S3 Sink
+          value: "io.confluent.connect.s3.S3SinkConnector" 
         - name: CONNECTOR_TASKS_MAX
           value: "1" # Maximum number of tasks to be created by this connector
         - name: CONNECTOR_S3_BUCKET_NAME
-          value: "elementor-data-candidates-bucket" # Specify your AWS S3 bucket name
+          value: "elementor-data-candidates-bucket" 
         - name: CONNECTOR_S3_REGION
           value: "eu-west-1" # Specify your AWS region
-        # Add more S3 Sink Connector configurations here as needed
+     
